@@ -1,0 +1,59 @@
+created:
+    - database/factories/UserFactory.php
+    - database/factories/HolidayFactory.php
+    - database/factories/LeaveFactory.php
+    - database/factories/ClientFactory.php
+    - database/factories/ProjectFactory.php
+    - database/factories/AttandanceFactory.php
+    - database/factories/BreakFactory.php
+    - database/factories/AssetFactory.php
+    - database/factories/DocumentFactory.php
+    - database/factories/SupportTicketFactory.php
+    - database/factories/SupportTicketResponseFactory.php
+    - database/factories/InvoiceFactory.php
+    - database/factories/InvoiceItemFactory.php
+    - database/factories/LeadFactory.php
+    - database/migrations/2024_09_09_142702_create_users_table.php
+    - database/migrations/2024_09_09_142703_create_holidays_table.php
+    - database/migrations/2024_09_09_142704_create_leaves_table.php
+    - database/migrations/2024_09_09_142705_create_clients_table.php
+    - database/migrations/2024_09_09_142706_create_projects_table.php
+    - database/migrations/2024_09_09_142707_create_attandances_table.php
+    - database/migrations/2024_09_09_142708_create_breaks_table.php
+    - database/migrations/2024_09_09_142709_create_assets_table.php
+    - database/migrations/2024_09_09_142710_create_documents_table.php
+    - database/migrations/2024_09_09_142711_create_support_tickets_table.php
+    - database/migrations/2024_09_09_142712_create_support_ticket_responses_table.php
+    - database/migrations/2024_09_09_142713_create_invoices_table.php
+    - database/migrations/2024_09_09_142714_create_invoice_items_table.php
+    - database/migrations/2024_09_09_142715_create_leads_table.php
+    - database/migrations/2024_09_09_142716_create_client_user_table.php
+    - app/Models/User.php
+    - app/Models/Holiday.php
+    - app/Models/Leave.php
+    - app/Models/Client.php
+    - app/Models/Project.php
+    - app/Models/Attandance.php
+    - app/Models/Break.php
+    - app/Models/Asset.php
+    - app/Models/Document.php
+    - app/Models/SupportTicket.php
+    - app/Models/SupportTicketResponse.php
+    - app/Models/Invoice.php
+    - app/Models/InvoiceItem.php
+    - app/Models/Lead.php
+models:
+    User: { name: string, email: 'string index', email_verified_at: datetime, leave_balance: integer, password: string }
+    Holiday: { name: string, date: date }
+    Leave: { user_id: unsignedInteger, date_from: date, date_to: date, is_half: 'boolean default:false', approved_by: unsignedInteger, approved_date: date }
+    Client: { name: string, email: 'string index', city: string, country: string, relationships: { belongsToMany: User } }
+    Project: { client_id: unsignedInteger, is_active: boolean, name: string, relationships: { belongsTo: Client } }
+    Attandance: { user_id: unsignedInteger, attandance_at: datetime, timer: 'integer nullable', summary: text }
+    Break: { user_id: unsignedInteger, attandance_at: datetime, timer: 'integer nullable' }
+    Asset: { title: string, description: text, file: 'string nullable', user_id: 'unsignedInteger nullable' }
+    Document: { user_id: unsignedInteger, title: string, file: string }
+    SupportTicket: { user_id: unsignedInteger, title: string, description: text }
+    SupportTicketResponse: { user_id: unsignedInteger, suppert_ticket_id: unsignedInteger, comment: 'string:1000' }
+    Invoice: { client_id: unsignedInteger, date: date, status: string }
+    InvoiceItem: { invoice_id: unsignedInteger, detail: string, amount: float }
+    Lead: { client_id: unsignedInteger }

@@ -4,16 +4,17 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\User;
+use App\Models\Client;
+use App\Models\Project;
 
-class UserFactory extends Factory
+class ProjectFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Project::class;
 
     /**
      * Define the model's default state.
@@ -21,11 +22,9 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
+            'client_id' => Client::factory(),
+            'is_active' => $this->faker->boolean(),
             'name' => $this->faker->name(),
-            'email' => $this->faker->safeEmail(),
-            'email_verified_at' => $this->faker->dateTime(),
-            'leave_balance' => $this->faker->numberBetween(0, 10000),
-            'password' => bcrypt('123123'),
         ];
     }
 }

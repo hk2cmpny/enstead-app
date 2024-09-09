@@ -1,0 +1,82 @@
+models:
+  User:
+    name: string
+    email: string index
+    email_verified_at: datetime
+    leave_balance: integer
+    password: string
+
+  Holiday:
+    name: string
+    date: date
+
+  Leave:
+    user_id: unsignedInteger
+    date_from: date
+    date_to: date
+    is_half: boolean default:false
+    approved_by: unsignedInteger
+    approved_date: date
+
+  Client:
+    name: string
+    email: string index
+    city: string
+    country: string
+
+    relationships:
+      belongsToMany: User
+
+  Project:
+    client_id: unsignedInteger
+    is_active: boolean
+    name: string
+
+    relationships:
+      belongsTo: Client
+
+
+  Attandance:
+    user_id: unsignedInteger
+    attandance_at: datetime
+    timer: integer nullable
+    summary: text
+
+  Break:
+    user_id: unsignedInteger
+    attandance_at: datetime
+    timer: integer nullable
+
+  Asset:
+    title: string
+    description: text
+    file: string nullable
+    user_id: unsignedInteger nullable
+
+  Document:
+    user_id: unsignedInteger
+    title: string
+    file: string
+
+  SupportTicket:
+    user_id: unsignedInteger
+    title: string
+    description: text
+
+  SupportTicketResponse:
+    user_id: unsignedInteger
+    suppert_ticket_id: unsignedInteger
+    comment: string:1000
+
+  Invoice:
+    client_id: unsignedInteger
+    date: date
+    status: string
+
+  InvoiceItem:
+    invoice_id: unsignedInteger
+    detail: string
+    amount: float
+
+  Lead:
+    client_id: unsignedInteger
